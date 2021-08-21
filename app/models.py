@@ -47,6 +47,7 @@ class Blog(db.Model):
     post=db.column(db.Text(),nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref='blog',lazy='dynamic')
+    upvote=db.Column('Upvote',backref='blog',lazy='dynamic')
 
 
     def save_blog(self):
@@ -73,5 +74,11 @@ class Comment(db.Model):
     
     def __repr__(self):
         return f'comment:{self.comment}'
+
+class Upvote(db.Model):
+    __tablename__='upvotes'
+    id=db.Column(db.Integer,primary_key=True)
+    user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+    blog_id=db.Column(db.Integer,db.ForignKey('blogs.id'))
 
 
