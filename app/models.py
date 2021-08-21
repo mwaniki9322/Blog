@@ -52,7 +52,7 @@ class Blog(db.Model):
     __tablename__='blogs'
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String(255))
-    post=db.column(db.Text(),nullable=True)
+    post=db.column(db.Text())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref='blog',lazy='dynamic')
     upvote=db.relationship('Upvote',backref='blog',lazy='dynamic')
@@ -90,7 +90,7 @@ class Upvote(db.Model):
     __tablename__='upvotes'
     id=db.Column(db.Integer,primary_key=True)
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
-    blog_id=db.Column(db.Integer,db.ForignKey('blogs.id'))
+    blog_id=db.Column(db.Integer,db.ForeignKey('blogs.id'))
 
     def save(self):
         db.session.add(self)
