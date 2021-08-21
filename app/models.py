@@ -1,5 +1,7 @@
 
 from operator import index
+
+from sqlalchemy.orm import backref
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -19,6 +21,8 @@ class User(db.Model,UserMixin):
     pass_secure=db.Column(db.String(255))
     bio=db.Column(db.String(255))
     profile_pic_path=db.Column(db.String(255))
+    blogs=db.relationship('Blog',backref='user',lazy='dynamic')
+    comment=db.relationship('Comment',backref='user',lazy='dynamic')
 
 
     @property
@@ -36,8 +40,26 @@ class User(db.Model,UserMixin):
         return f'User {self.username}'
 
 
-class blog:
-    __tablename__='blog'
+class Blog(db.Model):
+    __tablename__='blogs'
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String(255))
-    blog_content=db.column(db.String(255))
+    post=db.column(db.Text(),nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    blog=db.relationship('Blog',backref)
+
+
+    def save_b(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f'Blog {self.post}'
+
+class Comment(db.Model):
+    __tablename__='comments'
+    id=db.Column(db.Integer,primary_key=True)
+    comment=db.Column(db.Text(),nullable=False)
+    user_id=db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+    blog_id=db.Column(db.Integer,db.ForeignKey('blogs.id'),nullable=False)
+
