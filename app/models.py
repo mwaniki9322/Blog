@@ -23,6 +23,9 @@ class User(db.Model,UserMixin):
     profile_pic_path=db.Column(db.String(255))
     blogs=db.relationship('Blog',backref='user',lazy='dynamic')
     comment=db.relationship('Comment',backref='user',lazy='dynamic')
+    upvote=db.relationship('Upvote',backref='user',lazy='dynamic')
+    downvote=db.relationship('Downvote',backref='user',lazy='dynamic')
+
 
 
     @property
@@ -47,7 +50,8 @@ class Blog(db.Model):
     post=db.column(db.Text(),nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref='blog',lazy='dynamic')
-    upvote=db.Column('Upvote',backref='blog',lazy='dynamic')
+    upvote=db.relationship('Upvote',backref='blog',lazy='dynamic')
+    downvote=db.relationship('Downvote',backref='blog',lazy='dynamic')
 
 
     def save_blog(self):
@@ -81,4 +85,39 @@ class Upvote(db.Model):
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
     blog_id=db.Column(db.Integer,db.ForignKey('blogs.id'))
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_upvotes(cls,id):
+        upvote = Upvote.query.filter_by(blog_id=id).all()
+        return upvote
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.blog_id}'
+
+
+class Downvote(db.Model):
+    __tablename__ = 'downvotes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer,db.ForeignKey('blogs.id'))
+    
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    @classmethod
+    def get_downvotes(cls,id):
+        downvote = Downvote.query.filter_by(blog_id=id).all()
+        return downvote
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.blog_id}'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
