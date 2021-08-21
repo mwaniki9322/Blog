@@ -34,3 +34,10 @@ class User(db.Model,UserMixin):
 
     def __repr__(self):
         return f'User {self.username}'
+
+
+class blog:
+    __tablename__='blog'
+    id=db.Column(db.Integer,primary_key=True)
+    title=db.Column(db.String(255))
+    blog_content=db.column(db.String(255))
