@@ -1,7 +1,120 @@
-{%extends 'base.html'%}
+{%extends 'bootstrap/base.html'%}
+{% import 'macros.html' as macro %}
 {%block content%}
 
+<ul class="navbar" style="background-color: #B61919;height: 90px;">
+  {% if current_user.is_authenticated %}
+  <a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a>
+  <a href="{{url_for('auth.logout')}}">Sign out</a></li>
+  {% else %}
+  <a href="{{url_for('auth.login')}}">Sign in</a>
+  {%endif%}
 
+<header>
+	<div class="overlay">
+<h1>Simply The Best</h1>
+<h3>KENYAN POWER HOUSE</h3>
+<h2>Life of the Party</h2>
+<p>Kenyan Powerhouse is a Festival Culture Blog based in Nairobi, Kenya. The brand was established in the year 2019 by Zakaria Njenga Kinyanjui with the help of a trusted group of family and close friends as a result of live performance enthusiasm.
+
+Our mission is striving to give our audience the best experience in all matters, ‘Live Performance‘. Our vision is to showcase different festival cultures from The Motherland, Africa, and the rest of the World by 2040</p>
+	<br>
+	<button>READ MORE</button>
+		</div>
+</header>
+
+<div class="contaoner">
+  <h4>BLOGS</h4>
+<div class="row">
+  <div class="col-md-4">
+<div class="card">
+  <div class="card-title">
+    <h4>Festival</h4>
+    <div class="card-body">
+      <div  class="container tab-pane active" id="all"><br>
+        {{ macro.display(blogs) }}
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  *{padding: 0; margin: 0; box-sizing: border-box;}
+body{height: 900px;}
+header {
+	background-image: url('../static/20191229052042_IMG_0966.JPG');
+	text-align: center;
+	width: 100%;
+	height: auto;
+	background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	
+}
+header .overlay{
+	width: 100%;
+	height: 50%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
+	
+}
+
+h1 {
+	font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: 80px;
+	margin-bottom: 30px;
+}
+
+h3, p {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	margin-bottom: 30px;
+}
+
+button {
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 50px;
+	box-shadow: 0 3px 20px 0 #0000003b;
+}
+button:hover{
+	cursor: pointer;
+}
+a{
+          color: white;
+          float: right;
+          padding-left: 20px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-size: 20px;
+          margin-top: 30px;
+          margin-right: 20px;
+          
+      }
+      a:hover{
+          text-decoration: underline;
+          color: white;
+      }
+</style>
 
 
 
