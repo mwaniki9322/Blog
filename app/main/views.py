@@ -1,4 +1,4 @@
-from app.models import User
+from ..models import Blog, User
 from flask import render_template,abort,redirect,url_for
 from .forms import UpdateProfile
 from flask_login import login_required
@@ -11,7 +11,12 @@ def index():
     '''
     view function for index page
     '''
-    return render_template('index.html')
+    blogs=Blog.query.all()
+    social=Blog.query.filter_by(category='Social Events').all()
+    festival=Blog.query.filter_by(category='Festivals').all()
+    concert=Blog.query.filter_by(category='Concerts').all()
+
+    return render_template('index.html',social=social,festival=festival,concert=concert)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -21,6 +26,19 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
