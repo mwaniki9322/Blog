@@ -1,7 +1,8 @@
+from operator import pos
 from ..models import Blog, User
 from flask import render_template,abort,redirect,url_for
-from .forms import UpdateProfile
-from flask_login import login_required
+from .forms import BlogForm, UpdateProfile
+from flask_login import login_required,current_user
 from .. import db
 from . import main
 
@@ -17,6 +18,39 @@ def index():
     concert=Blog.query.filter_by(category='Concerts').all()
 
     return render_template('index.html',social=social,festival=festival,concert=concert)
+
+
+@main.route('/create_new',methods = ['POST','GET'])
+def new_blog():
+    form=BlogForm()
+    if form.validate_on_submit():
+        title=form.title.data
+        post=form.post.data
+        category=form.category.data
+        user_id=current_user
+
+        new_blog_object=Blog(post=post,user_id=current_user._get_current_object().id,category=category,title=title)
+
+        new_blog_object.save_blog()
+        return redirect(url_for('main.index'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @main.route('/user/<uname>')
 def profile(uname):
