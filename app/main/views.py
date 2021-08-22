@@ -8,6 +8,7 @@ from . import main
 
 
 @main.route('/')
+@login_required
 def index():
     '''
     view function for index page

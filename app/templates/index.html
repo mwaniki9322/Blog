@@ -19,17 +19,17 @@
 
 Our mission is striving to give our audience the best experience in all matters, ‘Live Performance‘. Our vision is to showcase different festival cultures from The Motherland, Africa, and the rest of the World by 2040</p>
 	<br>
-	<button>READ MORE</button>
+
+	<button><a href="#a" style="color: black;"></a>BLOGS</a></button>
 		</div>
 </header>
 
-<div class="contaoner">
-  <h4>BLOGS</h4>
+<div class="container" id="a">
+  <h4 id="t">BLOGS</h4>
 <div class="row">
   <div class="col-md-4">
 <div class="card">
   <div class="card-title">
-    <h4>Festival</h4>
     <div class="card-body">
       <div  class="container tab-pane active" id="all"><br>
         {{ macro.display(blogs) }}
@@ -65,6 +65,9 @@ header {
 	position: relative;
 	overflow: hidden;
 	
+}
+#container,h4{
+  text-align: center;
 }
 header .overlay{
 	width: 100%;

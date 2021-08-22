@@ -1,21 +1,16 @@
 {% macro display(sandwish) %}
-<div class="container-fluid">
-<div class="row">
 {% if sandwish %}
 {% for category in sandwish %}
-<div class="col-md-4" >
-<div class="thumbnail" id="carded">
-<h5 class="card-header">{{category.title}}</h5>
-<div class="card-body">
-    <p>{{category.post}}</p>
-    <p class="text-center"> Category: {{category.category}}</p>
-    <footer class="blockquote-footer text-center" > Posted by: {{category.user.username}}</footer>
-<div><span class="foot" >{{category.comment.count()}} Comments</span> 
-    <span class="foot" > <a href="{{url_for('main.like',id = category.id)}}">Like:{{category.upvote.count()}}</span>
-    
-    
-    <span class="foot"> <a href="{{url_for('main.dislike',id = category.id)}}">Dislike:{{category.downvote.count()}}</a></span>
-</div>
+<div class="col-md-4" id="bloog" >
+<div class>
+<h3>{{category.title}}</h3>
+<div>
+    <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">{{category.post}}</p>
+    <p> Category: {{category.category}}</p>
+     <p>Posted by: {{category.user.username}}</p>
+    <span>{{category.comment.count()}} Comments</span> 
+    <a href="{{url_for('main.like',id = category.id)}}" style="color: blue;margin-right: 100px;">Like:{{category.upvote.count()}}
+
          
 <a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-info btn-sm"> Comment</a>
 </div>
@@ -33,4 +28,8 @@
 {% endif %}
 </div>
 </div>
+
+<style>
+
+</style>
 {% endmacro %}
