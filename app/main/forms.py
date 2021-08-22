@@ -13,7 +13,7 @@ class UpdateProfile(FlaskForm):
 
 class BlogForm(FlaskForm):
     title=StringField('Title',validators=[Required()])
-    category = SelectField('Category', choices=[('Social Events','Social Events'),('Festivals','Festivals'),('Concerts','Concerts')],validators=[Required()])
+    category = SelectField('Category', choices=[('Social Events','Social'),('Festival','Festival'),('Concert','Concert')],validators=[Required()])
     post = TextAreaField('Your Blog', validators=[Required()])
     submit = SubmitField('Blog')
 
