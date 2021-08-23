@@ -128,3 +128,10 @@ class Downvote(db.Model):
 def load_user(user_id):
     return User.query.get(user_id)
 
+class Quote:
+        def __init__(self, author, id, quote):
+                self.author = author
+                self.id = id
+                self.quote =quote
+
+

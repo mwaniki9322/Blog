@@ -9,14 +9,14 @@
     <p> Category: {{category.category}}</p>
      <p>Posted by: {{category.user.username}}</p>
     <span>{{category.comment.count()}} Comments</span> 
-    <a href="{{url_for('main.like',id = category.id)}}" style="color: blue;margin-right: 100px;">Like:{{category.upvote.count()}}
+    <span><a href="{{url_for('main.like',id = category.id)}}" style="color: blue;margin-right: 100px;">Like:{{category.upvote.count()}}</a></span><br>
+    
 
          
 <a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-info btn-sm" style="background-color: #B61919 ;"> Comment</a>
 </div>
 </div>
 </div>
-
 {% endfor %}
 {% else %}
 <div class="card w-90 mb-3">
@@ -28,8 +28,24 @@
 {% endif %}
 </div>
 </div>
-
-<style>
-
-</style>
 {% endmacro %}
+
+
+{% macro display(quotes) %}
+{% for quote in quotes %}
+      {% if quote.quote == quotes[0].quote %}
+      {% else %}
+
+      <div class="container" style="text-align: center;">
+          {{quote.quote}}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% endmacro %}
+
+ 

@@ -1,5 +1,6 @@
 
-from ..models import Blog, Comment, User,Upvote,Downvote
+from app.requests import get_quotes, repeat_get_quotes
+from ..models import Blog, Comment, User,Upvote,Downvote,Quote
 from flask import render_template,abort,redirect,url_for
 from .forms import BlogForm, CommentForm, UpdateProfile
 from flask_login import login_required,current_user
@@ -13,12 +14,24 @@ def index():
     '''
     view function for index page
     '''
+   
     blogs=Blog.query.all()
     social=Blog.query.filter_by(category='Social').all()
     festival=Blog.query.filter_by(category='Festival').all()
     concert=Blog.query.filter_by(category='Concert').all()
 
-    return render_template('index.html', social=social,festival=festival, blogs=blogs,concert=concert)
+    return render_template('index.html', social=social,festival=festival, blogs=blogs,concert=concert,quotes=quotes)
+
+@main.route('/quotes')
+@login_required
+def quotes():
+    '''
+    view function for quotes
+    '''
+    quote= get_quotes
+    quotes= repeat_get_quotes(10, get_quotes)
+
+    return render_template('quotes.html',quotes=quotes)
 
 
 @main.route('/create_new',methods = ['POST','GET'])
