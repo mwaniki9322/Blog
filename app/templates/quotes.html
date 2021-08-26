@@ -1,11 +1,15 @@
 {%extends 'base.html'%}
 {% import 'macros.html' as macro %}
+
+
 {%block content%}
-
-
 <div  class="container tab-pane active" id="all"><br>
-    {{ macro.display(quotes) }}
+ {%for quotes in quotes%}
+     
+<p>{{quotes.quote}}</p>
+{%endfor%}
 </div>
+
 
 
 

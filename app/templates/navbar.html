@@ -5,6 +5,10 @@
     {% else %}
     <a href="{{url_for('auth.login')}}">Sign in</a>
     {%endif%}
+    <a href="{{url_for('main.quotes')}}">Quotes</a>
+
+    <a href="/create_new">Add Blog</a>
+
     <a href="{{url_for('main.index')}}">Home</a>
   </ul>
 

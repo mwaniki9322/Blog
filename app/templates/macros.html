@@ -10,6 +10,7 @@
      <p>Posted by: {{category.user.username}}</p>
     <span>{{category.comment.count()}} Comments</span> 
     <span><a href="{{url_for('main.like',id = category.id)}}" style="color: blue;margin-right: 100px;">Like:{{category.upvote.count()}}</a></span><br>
+    <span><a href="{{url_for('main.dislike',id = category.id)}}" style="color: blue;margin-right: 100px;">DisLike:{{category.downvote.count()}}</a></span><br>
     
 
          
@@ -26,26 +27,12 @@
 </div>
 </div>
 {% endif %}
-</div>
-</div>
-{% endmacro %}
-
 
 {% macro display(quotes) %}
 {% for quote in quotes %}
-      {% if quote.quote == quotes[0].quote %}
-      {% else %}
-
       <div class="container" style="text-align: center;">
           {{quote.quote}}
         </div>
-      </div>
-      {% endif %}
       {% endfor %}
-    </div>
-  </div>
-
-
 {% endmacro %}
-
- 
+{%endmacro%}

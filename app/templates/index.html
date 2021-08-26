@@ -9,7 +9,10 @@
   {% else %}
   <a href="{{url_for('auth.login')}}">Sign in</a>
    {%endif%}
-   
+   <a href="{{url_for('main.quotes')}}">Quotes</a>
+
+   <a href="/create_new">Add Blog</a>
+
    <a href="{{url_for('main.index')}}">Home</a>
 
 <header>
@@ -22,11 +25,11 @@
 Our mission is striving to give our audience the best experience in all matters, ‘Live Performance‘. Our vision is to showcase different festival cultures from The Motherland, Africa, and the rest of the World by 2040</p>
 	<br>
 
-	<button>BLOGS</button>
+	<button href="">BLOGS</button>
 		</div>
 </header>
 
-<div class="container">
+<div class="container" id="t">
   <h2 id="t" style="font-weight: bolder;">BLOGS</h2>
 <div class="row">
   <div class="col-md-4">
@@ -42,6 +45,8 @@ Our mission is striving to give our audience the best experience in all matters,
 </div>
 </div>
 </div>
+
+
 
 
 

@@ -29,7 +29,7 @@ def quotes():
     view function for quotes
     '''
     quote= get_quotes
-    quotes= repeat_get_quotes(10, get_quotes)
+    quotes= repeat_get_quotes(1, get_quotes)
 
     return render_template('quotes.html',quotes=quotes)
 
